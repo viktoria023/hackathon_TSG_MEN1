@@ -1,0 +1,30 @@
+---
+title: "File extraction"
+output: html_notebook
+---
+
+
+```{r}
+list_of_lists <- list()
+names <- c()
+
+directories <- list.dirs(path = "/Users/jeanneinchauspe/Desktop/Hackhathon/cancer-data", full.names = TRUE, recursive = FALSE)
+
+i = 1
+for (directory in directories){
+  
+  fileslist <- list.files(path = directory, pattern = ".counts.gz", all.files = TRUE, full.names = FALSE)
+  list_of_lists[[i]]<- fileslist
+  i <- i+1
+  name <- basename(directory)
+  names <- c(names, name)
+  
+
+}
+names(list_of_lists) <- names
+
+list_of_lists
+
+saveRDS(list_of_lists , file = "cancer_files_lists.rds")
+```
+
