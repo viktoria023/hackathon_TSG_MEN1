@@ -35,12 +35,10 @@ for (i in 1:length(list)){
   #this is just to visualise progress
   # print(i)
 }
-
 #reformat counts matrix to make applicable to DESeq2
+backup <- counts_genes
 rownames(counts_genes) <- counts_genes[,1]
 counts_genes <- counts_genes[,-1]
-counts_genes <- as.matrix(counts_genes)
-colnames(counts_genes) <- NULL
 
 counts_genes <- as.data.frame(counts_genes)
 counts_genes_tmp <- apply(as.matrix.noquote(counts_genes),2,as.numeric)
@@ -50,5 +48,5 @@ counts_genes <- as.data.frame(counts_genes)
 
 #save as a list of dataframes
 cancer_data <- list(counts_genes)
-savefile<-paste0(paste0(cancers[k]), "_raw_data.rds")
+savefile <- paste0(paste0(cancers[k]), "_raw_data.rds")
 saveRDS(cancer_data, file = savefile)
