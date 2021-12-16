@@ -14,8 +14,7 @@ DDR_epi_genes_names <- rbind(DDR_epi_genes_names, Men1)
 #read in filenames per cancer from list of lists and iterate through list
 file_names <- readRDS("cancer_files_lists.rds")
 cancers <- names(file_names)
-
-setwd("~/Documents/Studium/PhD/Bioinfo/Hackathon/cancer-data-all-files")
+setwd("./cancer-data-all-files")
 
 #k==chooses cancer type from list. 1 is already done, and I will continue with 2-4
 k=1
@@ -34,7 +33,7 @@ for (i in 1:length(list)){
   }
   counts_genes <- cbind(counts_genes, as.numeric(counts))
   #this is just to visualise progress
-  print(i)
+  # print(i)
 }
 
 #reformat counts matrix to make applicable to DESeq2
