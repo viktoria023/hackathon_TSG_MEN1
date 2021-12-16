@@ -1,6 +1,6 @@
 library(GenomicDataCommons)
-
-setwd("~/Documents/Studium/PhD/Bioinfo/Hackathon")
+path<- strsplit(getwd(),'/')[[1]]
+if (isFALSE(path[length(path)]=="hackathon_TSG_MEN1")){stop("Set working directory to hackathon_TSG_MEN1")} 
 
 #load curated gene list
 DDR_epi_genes_names <- readRDS("DDR_epi_genes_names.rds")
