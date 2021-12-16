@@ -1,6 +1,6 @@
 library(GenomicDataCommons)
-
-setwd("~/Documents/Studium/PhD/Bioinfo/Hackathon")
+path<- strsplit(getwd(),'/')[[1]]
+if (isFALSE(path[length(path)]=="hackathon_TSG_MEN1")){stop("Set working directory to hackathon_TSG_MEN1")} 
 
 #load curated gene list
 DDR_epi_genes_names <- readRDS("DDR_epi_genes_names.rds")
@@ -14,8 +14,7 @@ DDR_epi_genes_names <- rbind(DDR_epi_genes_names, Men1)
 #read in filenames per cancer from list of lists and iterate through list
 file_names <- readRDS("cancer_files_lists.rds")
 cancers <- names(file_names)
-
-setwd("~/Documents/Studium/PhD/Bioinfo/Hackathon/cancer-data-all-files")
+setwd("./cancer-data-all-files")
 
 #k==chooses cancer type from list. 1 is already done, and I will continue with 2-4
 k=1
@@ -34,14 +33,12 @@ for (i in 1:length(list)){
   }
   counts_genes <- cbind(counts_genes, as.numeric(counts))
   #this is just to visualise progress
-  print(i)
+  # print(i)
 }
-
 #reformat counts matrix to make applicable to DESeq2
+backup <- counts_genes
 rownames(counts_genes) <- counts_genes[,1]
 counts_genes <- counts_genes[,-1]
-counts_genes <- as.matrix(counts_genes)
-colnames(counts_genes) <- NULL
 
 counts_genes <- as.data.frame(counts_genes)
 counts_genes_tmp <- apply(as.matrix.noquote(counts_genes),2,as.numeric)
@@ -51,5 +48,5 @@ counts_genes <- as.data.frame(counts_genes)
 
 #save as a list of dataframes
 cancer_data <- list(counts_genes)
-savefile<-paste0(paste0(cancers[k]), "_raw_data.rds")
+savefile <- paste0(paste0(cancers[k]), "_raw_data.rds")
 saveRDS(cancer_data, file = savefile)
