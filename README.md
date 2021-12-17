@@ -5,4 +5,4 @@ Raw counts of gene expression for various different cancers were extracted from 
 
 For normalisation of the raw counts, the MOR/MRN method was used as described by Perez et al (2021). Spearman correlation analysis was performed for every gene w.r.t. Men1 and the top scoring 10 % were compared across different tissues. Finally, genes with high correlation across different tissues were compared in health (GTEx) and disease (TCGA). The according scripts and resulting candidate genes can be found in folder 'correlation_analysis'. 
 
-As an extension, the absolute difference of correlation with Men1 expression in healthy vs cancer tissue was calculated and visualized as a heatmap ("correlation_analysis/visualiser.py") for five different tissues.
+As an extension, the absolute difference of correlation with Men1 expression in healthy vs cancer tissue was calculated and visualized as a heatmap ("correlation_analysis/visualise_absolute_diffs.py") for five different tissues.
