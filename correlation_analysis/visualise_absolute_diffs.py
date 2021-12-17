@@ -1,5 +1,3 @@
-from urllib.error import HTTPError
-from warnings import resetwarnings
 import rpy2.robjects as robjects
 from rpy2.robjects import r, pandas2ri
 import numpy as np
@@ -49,9 +47,9 @@ def merge_sort(df_c, df_h):
     diff = pd.DataFrame(np.asarray(out[1:])).T
     diff.columns=['Adrenal Gland','Bladder','Brain','Lung','Thyroid']
     diff.index=idx
-    diff['sum']=diff.sum(axis=1)
+    diff['Sum']=diff.sum(axis=1)
     diff=diff.dropna(axis=0)
-    diff=diff.sort_values('sum',ascending=False)
+    diff=diff.sort_values('Sum',ascending=False)
     top = diff.iloc[:5,:]
     bottom = diff.iloc[-5:,:]
     merged = pd.concat([top,bottom])
@@ -59,10 +57,11 @@ def merge_sort(df_c, df_h):
 
     return merged, m
 
+# Generate heatmap of differences
 
 def plot_diffs(merged, m, genedict):
-    codes=[genedict[x] for x in merged.index.tolist()]
 
+    codes=[genedict[x] for x in merged.index.tolist()]
     fig, ax = plt.subplots(figsize=(5,5.5))
     ax.grid(False)
     im=ax.imshow(m)
@@ -92,4 +91,3 @@ if __name__== "__main__":
     cancer = "correlation_analysis/unfiltered_cancer_correlation_matrix.rds"
     healthy = "correlation_analysis/unfiltered_gtex_correlation_matrix.rds"
     run(gene_codes,cancer,healthy)
-
