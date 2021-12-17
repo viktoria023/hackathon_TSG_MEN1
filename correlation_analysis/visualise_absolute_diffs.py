@@ -89,7 +89,7 @@ def run(gene_codes,cancer_rds,healthy_rds):
 
 if __name__== "__main__":
     gene_codes='DDR_epi_genes_names.rds'
-    cancer = "unfiltered_cancer_correlation_matrix.rds"
-    healthy = "unfiltered_gtex_correlation_matrix.rds"
+    cancer = "correlation_analysis/unfiltered_cancer_correlation_matrix.rds"
+    healthy = "correlation_analysis/unfiltered_gtex_correlation_matrix.rds"
     run(gene_codes,cancer,healthy)
 
